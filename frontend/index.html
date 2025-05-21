@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ace Academy - Premier online education in collaboration with Telangana Government, offering personalized learning with British and SCERT curriculum.">
+  <title>Ace Academy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #2F4F4F;
+      --secondary-color: #556B2F;
+      --accent-color: #8B0000;
+      --light-bg: #F5F5F5;
+      --dark-text: black;
+      --border-color: #D3D3D3;
+      --success-color: #008000;
+      --error-color: #D8000C;
+      --header-gradient: linear-gradient(135deg, #2F4F4F 0%, #4A7878 50%, #2F4F4F 100%);
+      --button-gradient: linear-gradient(135deg, #556B2F, #6B8E23);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cambria', 'Times New Roman', serif;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: large;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: var(--header-gradient);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Ccircle fill="rgba(255,255,255,0.1)" cx="100" cy="100" r="100"/%3E%3C/svg%3E');
+      opacity: 0.3;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      animation: fadeInDown 1s ease;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 0.5rem auto;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    nav {
+      background-color: var(--secondary-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      transform: translateY(-2px);
+    }
+
+    section {
+      background: white;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-left: 15px solid var(--secondary-color);
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Ccircle fill="rgba(85,107,47,0.05)" cx="5" cy="5" r="5"/%3E%3C/svg%3E');
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--secondary-color);
+    }
+
+    section h3 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .highlight {
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .card i {
+      font-size: 2rem;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--button-gradient);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.3s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      display: grid;
+      gap: 0.98rem;
+      max-width: 600px;
+      margin-left: 0;
+      width: 100%;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    form input,
+    form select,
+    form textarea {
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      width: 100%;
+      font-family: 'Cambria', 'Times New Roman', serif;
+      font-size: large;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    form button {
+      background: var(--button-gradient);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .message {
+      padding: 1rem;
+      border-radius: 4px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .message.success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .message.error {
+      background-color: var(--error-color);
+      color: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    table td, table th {
+      padding: 0.5rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    table th {
+      background-color: var(--light-bg);
+      font-weight: bold;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .social-link a,
+    .mail-link a,
+    .phone-link a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .social-link a:hover {
+      color: #E1306C;
+    }
+
+    .mail-link a:hover {
+      color: var(--accent-color);
+    }
+
+    .phone-link a:hover {
+      color: #25D366;
+    }
+
+    .fab.fa-instagram,
+    .fa-regular.fa-envelope,
+    .fas.fa-phone {
+      font-size: 1.2em;
+    }
+
+    .fas.fa-phone {
+      transform: rotate(10deg);
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 45px;
+      margin-top: auto;
+    }
+
+    footer .social-icons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    footer .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    footer .social-icons a:hover {
+      color: var(--secondary-color);
+    }
+
+    #chatButton {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: transform 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    #chatButton:hover {
+      transform: scale(1.1);
+    }
+
+    #chatContainer {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 500px;
+      height: 700px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+    }
+
+    .chat-visible {
+      display: flex !important;
+    }
+
+    #chatHeader {
+      padding: 25px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #chatMinimize {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    #chatMessages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background-color: #f8f9fa;
+    }
+
+    .message {
+      margin-bottom: 25px;
+      padding: 9px 12px;
+      border-radius: 15px;
+      max-width: 80%;
+    }
+
+    .user-message {
+      background-color: var(--primary-color);
+      color: white;
+      margin-left: auto;
+    }
+
+    .bot-message {
+      background-color: #e9ecef;
+      color: black;
+    }
+
+    #chatInput {
+      padding: 25px;
+      display: flex;
+      gap: 25px;
+      border-top: 1px solid #ddd;
+    }
+
+    #userInput {
+      flex: 1;
+      padding: 18px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: 'Cambria', 'Times New Roman', serif;
+      font-size: large;
+    }
+
+    #sendButton {
+      padding: 9px 25px;
+      background: var(--button-gradient);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Cambria', 'Times New Roman', serif;
+    }
+
+    #sendButton:hover {
+      background: var(--secondary-color);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .country-code-select {
+      width: 30%;
+      margin-right: 10px;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: 'Cambria', 'Times New Roman', serif;
+      font-size: large;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      nav ul {
+        gap: 0.5rem;
+      }
+
+      section {
+        padding: 1.5rem;
+      }
+
+      form {
+        margin-left: 0;
+      }
+
+      #chatContainer {
+        width: 90%;
+        height: 80vh;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1.2rem;
+      }
+
+      .country-code-select {
+        width: 40%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav ul {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      section {
+        padding: 1rem;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .country-code-select {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+    .svg {
+      filter: brightness(0) saturate(100%) invert(34%) sepia(29%) saturate(460%) hue-rotate(71deg) brightness(91%) contrast(86%);
+    }
+  </style>
+</head>
+<body>
+  <header id="home">
+    <div class="container">
+      <h1>Ace Academy</h1>
+      <p>Empowering Future Leaders with World-Class Education in Collaboration with Telangana Government</p>
+      <a href="#enroll" class="cta-button">Enroll Now</a>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#enroll">Enroll</a></li>
+        <li><a href="#applyToTeach">Apply to Teach</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section id="about">
+      <div class="container">
+        <h2>About Ace Academy</h2>
+        <p>Ace Academy is a premier online school partnered with the Telangana Government, dedicated to providing personalized education from Nursery to Intermediate II year. Our mission is to foster academic excellence and personal growth through a <span class="highlight">1:1 teacher-student ratio</span>, ensuring tailored learning experiences.</p>
+        <p>We follow the <span class="highlight">British Curriculum</span> alongside SCERT Telangana books, with Telugu as a compulsory subject and options for Urdu or Hindi. Our expert faculty and innovative platform make us the ideal choice for shaping your child's future.</p>
+        <div class="card-grid">
+          <div class="card">
+            <i class="fas fa-graduation-cap"></i>
+            <p><strong>Personalized Learning</strong><br>1:1 mentorship tailored to each student's needs.</p>
+          </div>
+          <div class="card">
+            <i class="fas fa-book-open"></i>
+            <p><strong>Comprehensive Curriculum</strong><br>Blending British and SCERT standards for holistic education.</p>
+          </div>
+          <div class="card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <p><strong>Expert Faculty</strong><br>Highly qualified tutors passionate about teaching.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses">
+      <div class="container">
+        <h2>Our Courses</h2>
+        <p>At Ace Academy, we offer a range of programs designed to meet the needs of students from Nursery to Intermediate II year, combining global standards with local relevance.</p>
+        <div class="card-grid">
+          <div class="card">
+            <img src="quran.svg" class="svg" style="width: 42px; height: 42px;">
+            <h3>Quran with Tajweed</h3>
+            <p>Learn the Holy Quran with proper pronunciation and Tajweed rules for accurate and beautiful recitation.</p>
+          </div>
+          <div class="card">
+            <img src="coding.svg" class="svg" style="width: 42px; height: 42px;">
+            <h3>Tech & Coding</h3>
+            <p>Comprehensive education in programming and next-gen technologies.</p>
+          </div>
+          <div class="card">
+            <i class="fas fa-university"></i>
+            <h3>Intermediate I & II</h3>
+            <p>Advanced studies aligned with career aspirations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="enroll">
+      <div class="container">
+        <h2>Enroll in Class</h2>
+        <form id="enrollmentForm">
+          <h3>Student Information</h3>
+          <div class="form-group">
+            <label for="studentName">Student’s Name:</label>
+            <input type="text" id="studentName" name="studentName" required aria-label="Student's Name">
+          </div>
+          <div class="form-group">
+            <label for="studentDob">Date of Birth (MM/DD/YY):</label>
+            <input type="date" id="studentDob" name="dob" required aria-label="Date of Birth">
+          </div>
+          <div class="form-group">
+            <label>Gender:</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="male" name="gender" value="Male" required aria-label="Male">
+                <label for="male">Male</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="female" name="gender" value="Female" required aria-label="Female">
+                <label for="female">Female</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="studentResidentialAddress">Residential Address:</label>
+            <input type="text" id="studentResidentialAddress" name="address" required aria-label="Residential Address">
+          </div>
+          <div class="form-group">
+            <label for="studentcity">City:</label>
+            <input type="text" id="studentcity" name="city" required aria-label="City">
+          </div>
+          <div class="form-group">
+            <label for="studentstate">State:</label>
+            <input type="text" id="studentstate" name="state" required aria-label="State">
+          </div>
+          <div class="form-group">
+            <label for="studentcountry">Country:</label>
+            <input type="text" id="studentcountry" name="country" required aria-label="Country">
+          </div>
+          <h3>Parent/Guardian Information</h3>
+          <div class="form-group">
+            <label for="fatherName">Father’s Name:</label>
+            <input type="text" id="fatherName" name="fatherName" required aria-label="Father's Name">
+          </div>
+          <div class="form-group">
+            <label for="fatherQualification">Qualifications:</label>
+            <input type="text" id="fatherQualification" name="fatherQualification" required aria-label="Father's Qualifications">
+          </div>
+          <div class="form-group">
+            <label for="fatherOccupation">Occupation:</label>
+            <input type="text" id="fatherOccupation" name="fatherOccupation" required aria-label="Father's Occupation">
+          </div>
+          <div class="form-group">
+            <label for="motherName">Mother’s Name:</label>
+            <input type="text" id="motherName" name="motherName" required aria-label="Mother's Name">
+          </div>
+          <div class="form-group">
+            <label for="motherQualification">Qualifications:</label>
+            <input type="text" id="motherQualification" name="motherQualification" required aria-label="Mother's Qualifications">
+          </div>
+          <div class="form-group">
+            <label for="motherOccupation">Occupation:</label>
+            <input type="text" id="motherOccupation" name="motherOccupation" required aria-label="Mother's Occupation">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required aria-label="Email Address">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <div style="display: flex; gap: 10px;">
+              <select id="countryCodeEnroll" name="countryCode" class="country-code-select" required aria-label="Country Code">
+                <option value="+93">🇦🇫 Afghanistan (+93)</option>
+                <option value="+355">🇦🇱 Albania (+355)</option>
+                <option value="+213">🇩🇿 Algeria (+213)</option>
+                <option value="+376">🇦🇩 Andorra (+376)</option>
+                <option value="+244">🇦🇴 Angola (+244)</option>
+                <option value="+54">🇦🇷 Argentina (+54)</option>
+                <option value="+374">🇦🇲 Armenia (+374)</option>
+                <option value="+61">🇦🇺 Australia (+61)</option>
+                <option value="+43">🇦🇹 Austria (+43)</option>
+                <option value="+994">🇦🇿 Azerbaijan (+994)</option>
+                <option value="+973">🇧🇭 Bahrain (+973)</option>
+                <option value="+880">🇧🇩 Bangladesh (+880)</option>
+                <option value="+375">🇧🇾 Belarus (+375)</option>
+                <option value="+32">🇧🇪 Belgium (+32)</option>
+                <option value="+975">🇧🇹 Bhutan (+975)</option>
+                <option value="+591">🇧🇴 Bolivia (+591)</option>
+                <option value="+387">🇧🇦 Bosnia and Herzegovina (+387)</option>
+                <option value="+267">🇧🇼 Botswana (+267)</option>
+                <option value="+55">🇧🇷 Brazil (+55)</option>
+                <option value="+359">🇧🇬 Bulgaria (+359)</option>
+                <option value="+226">🇧🇫 Burkina Faso (+226)</option>
+                <option value="+257">🇧🇮 Burundi (+257)</option>
+                <option value="+855">🇰🇭 Cambodia (+855)</option>
+                <option value="+237">🇨🇲 Cameroon (+237)</option>
+                <option value="+1">🇨🇦 Canada (+1)</option>
+                <option value="+238">🇨🇻 Cape Verde (+238)</option>
+                <option value="+236">🇨🇫 Central African Republic (+236)</option>
+                <option value="+235">🇹🇩 Chad (+235)</option>
+                <option value="+56">🇨🇱 Chile (+56)</option>
+                <option value="+86">🇨🇳 China (+86)</option>
+                <option value="+57">🇨🇴 Colombia (+57)</option>
+                <option value="+269">🇰🇲 Comoros (+269)</option>
+                <option value="+506">🇨🇷 Costa Rica (+506)</option>
+                <option value="+385">🇭🇷 Croatia (+385)</option>
+                <option value="+53">🇨🇺 Cuba (+53)</option>
+                <option value="+357">🇨🇾 Cyprus (+357)</option>
+                <option value="+420">🇨🇿 Czech Republic (+420)</option>
+                <option value="+45">🇩🇰 Denmark (+45)</option>
+                <option value="+253">🇩🇯 Djibouti (+253)</option>
+                <option value="+1">🇩🇴 Dominican Republic (+1)</option>
+                <option value="+593">🇪🇨 Ecuador (+593)</option>
+                <option value="+20">🇪🇬 Egypt (+20)</option>
+                <option value="+503">🇸🇻 El Salvador (+503)</option>
+                <option value="+372">🇪🇪 Estonia (+372)</option>
+                <option value="+251">🇪🇹 Ethiopia (+251)</option>
+                <option value="+679">🇫🇯 Fiji (+679)</option>
+                <option value="+358">🇫🇮 Finland (+358)</option>
+                <option value="+33">🇫🇷 France (+33)</option>
+                <option value="+241">🇬🇦 Gabon (+241)</option>
+                <option value="+995">🇬🇪 Georgia (+995)</option>
+                <option value="+49">🇩🇪 Germany (+49)</option>
+                <option value="+233">🇬🇭 Ghana (+233)</option>
+                <option value="+30">🇬🇷 Greece (+30)</option>
+                <option value="+502">🇬🇹 Guatemala (+502)</option>
+                <option value="+224">🇬🇳 Guinea (+224)</option>
+                <option value="+592">🇬🇾 Guyana (+592)</option>
+                <option value="+509">🇭🇹 Haiti (+509)</option>
+                <option value="+504">🇭🇳 Honduras (+504)</option>
+                <option value="+36">🇭🇺 Hungary (+36)</option>
+                <option value="+354">🇮🇸 Iceland (+354)</option>
+                <option value="+91" selected>🇮🇳 India (+91)</option>
+                <option value="+62">🇮🇩 Indonesia (+62)</option>
+                <option value="+98">🇮🇷 Iran (+98)</option>
+                <option value="+964">🇮🇶 Iraq (+964)</option>
+                <option value="+353">🇮🇪 Ireland (+353)</option>
+                <option value="+39">🇮🇹 Italy (+39)</option>
+                <option value="+81">🇯🇵 Japan (+81)</option>
+                <option value="+962">🇯🇴 Jordan (+962)</option>
+                <option value="+7">🇰🇿 Kazakhstan (+7)</option>
+                <option value="+254">🇰🇪 Kenya (+254)</option>
+                <option value="+965">🇰🇼 Kuwait (+965)</option>
+                <option value="+996">🇰🇬 Kyrgyzstan (+996)</option>
+                <option value="+856">🇱🇦 Laos (+856)</option>
+                <option value="+961">🇱🇧 Lebanon (+961)</option>
+                <option value="+218">🇱🇾 Libya (+218)</option>
+                <option value="+352">🇱🇺 Luxembourg (+352)</option>
+                <option value="+261">🇲🇬 Madagascar (+261)</option>
+                <option value="+60">🇲🇾 Malaysia (+60)</option>
+                <option value="+960">🇲🇻 Maldives (+960)</option>
+                <option value="+223">🇲🇱 Mali (+223)</option>
+                <option value="+356">🇲🇹 Malta (+356)</option>
+                <option value="+230">🇲🇺 Mauritius (+230)</option>
+                <option value="+52">🇲🇽 Mexico (+52)</option>
+                <option value="+212">🇲🇦 Morocco (+212)</option>
+                <option value="+95">🇲🇲 Myanmar (+95)</option>
+                <option value="+264">🇳🇦 Namibia (+264)</option>
+                <option value="+977">🇳🇵 Nepal (+977)</option>
+                <option value="+31">🇳🇱 Netherlands (+31)</option>
+                <option value="+64">🇳🇿 New Zealand (+64)</option>
+                <option value="+234">🇳🇬 Nigeria (+234)</option>
+                <option value="+47">🇳🇴 Norway (+47)</option>
+                <option value="+968">🇴🇲 Oman (+968)</option>
+                <option value="+92">🇵🇰 Pakistan (+92)</option>
+                <option value="+63">🇵🇭 Philippines (+63)</option>
+                <option value="+48">🇵🇱 Poland (+48)</option>
+                <option value="+351">🇵🇹 Portugal (+351)</option>
+                <option value="+974">🇶🇦 Qatar (+974)</option>
+                <option value="+40">🇷🇴 Romania (+40)</option>
+                <option value="+7">🇷🇺 Russia (+7)</option>
+                <option value="+966">🇸🇦 Saudi Arabia (+966)</option>
+                <option value="+65">🇸🇬 Singapore (+65)</option>
+                <option value="+27">🇿🇦 South Africa (+27)</option>
+                <option value="+82">🇰🇷 South Korea (+82)</option>
+                <option value="+34">🇪🇸 Spain (+34)</option>
+                <option value="+94">🇱🇰 Sri Lanka (+94)</option>
+                <option value="+46">🇸🇪 Sweden (+46)</option>
+                <option value="+41">🇨🇭 Switzerland (+41)</option>
+                <option value="+66">🇹🇭 Thailand (+66)</option>
+                <option value="+90">🇹🇷 Turkey (+90)</option>
+                <option value="+380">🇺🇦 Ukraine (+380)</option>
+                <option value="+44">🇬🇧 United Kingdom (+44)</option>
+                <option value="+1">🇺🇸 United States (+1)</option>
+                <option value="+58">🇻🇪 Venezuela (+58)</option>
+                <option value="+84">🇻🇳 Vietnam (+84)</option>
+                <option value="+967">🇾🇪 Yemen (+967)</option>
+                <option value="+263">🇿🇼 Zimbabwe (+263)</option>
+              </select>
+              <input type="tel" id="phoneEnroll" name="phone" placeholder="Enter phone number" required aria-label="Phone Number">
+            </div>
+          </div>
+          <h3>Previous Academic Year Details</h3>
+          <div class="form-group">
+            <label for="previousSchool">Name of Previous School:</label>
+            <input type="text" id="previousSchool" name="previousSchool" required aria-label="Previous School">
+          </div>
+          <div class="form-group">
+            <label for="lastClass">Last Class Attended:</label>
+            <input type="text" id="lastClass" name="lastClass" required aria-label="Last Class Attended">
+          </div>
+          <div class="form-group">
+            <label for="admissionClass">Seeking Admission in Class:</label>
+            <input type="text" id="admissionClass" name="admissionClass" required aria-label="Admission Class">
+          </div>
+          <div class="form-group">
+            <label for="percentage">Percentage/Grade Scored:</label>
+            <input type="text" id="percentage" name="percentage" required aria-label="Percentage/Grade Scored">
+          </div>
+          <button type="submit">Submit</button>
+          <p>For any inquiry, <a href="#contact">Contact Us</a></p>
+          <div id="enrollmentMessage" class="message" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="applyToTeach">
+      <div class="container">
+        <h2>Apply to Teach</h2>
+        <form id="teacherApplicationForm">
+          <h3>Applicant Information</h3>
+          <div class="form-group">
+            <label for="applicantName">Full Name:</label>
+            <input type="text" id="applicantName" name="applicantName" required aria-label="Full Name">
+          </div>
+          <div class="form-group">
+            <label for="applicantDob">Date of Birth (MM/DD/YY):</label>
+            <input type="date" id="applicantDob" name="dob" required aria-label="Date of Birth">
+          </div>
+          <div class="form-group">
+            <label>Gender:</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="male" name="gender" value="Male" required aria-label="Male">
+                <label for="male">Male</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="female" name="gender" value="Female" required aria-label="Female">
+                <label for="female">Female</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="applicantResidentialAddress">Residential Address:</label>
+            <input type="text" id="applicantResidentialAddress" name="address" required aria-label="Residential Address">
+          </div>
+          <div class="form-group">
+            <label for="applicantCity">City:</label>
+            <input type="text" id="applicantCity" name="city" required aria-label="City">
+          </div>
+          <div class="form-group">
+            <label for="applicantState">State:</label>
+            <input type="text" id="applicantState" name="state" required aria-label="State">
+          </div>
+          <div class="form-group">
+            <label for="applicantCountry">Country:</label>
+            <input type="text" id="applicantCountry" name="country" required aria-label="Country">
+          </div>
+          <h3>Contact Information</h3>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required aria-label="Email Address">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <div style="display: flex; gap: 10px;">
+              <select id="countryCodeApply" name="countryCode" class="country-code-select" required aria-label="Country Code">
+                <option value="+93">🇦🇫 Afghanistan (+93)</option>
+                <option value="+355">🇦🇱 Albania (+355)</option>
+                <option value="+213">🇩🇿 Algeria (+213)</option>
+                <option value="+376">🇦🇩 Andorra (+376)</option>
+                <option value="+244">🇦🇴 Angola (+244)</option>
+                <option value="+54">🇦🇷 Argentina (+54)</option>
+                <option value="+374">🇦🇲 Armenia (+374)</option>
+                <option value="+61">🇦🇺 Australia (+61)</option>
+                <option value="+43">🇦🇹 Austria (+43)</option>
+                <option value="+994">🇦🇿 Azerbaijan (+994)</option>
+                <option value="+973">🇧🇭 Bahrain (+973)</option>
+                <option value="+880">🇧🇩 Bangladesh (+880)</option>
+                <option value="+375">🇧🇾 Belarus (+375)</option>
+                <option value="+32">🇧🇪 Belgium (+32)</option>
+                <option value="+975">🇧🇹 Bhutan (+975)</option>
+                <option value="+591">🇧🇴 Bolivia (+591)</option>
+                <option value="+387">🇧🇦 Bosnia and Herzegovina (+387)</option>
+                <option value="+267">🇧🇼 Botswana (+267)</option>
+                <option value="+55">🇧🇷 Brazil (+55)</option>
+                <option value="+359">🇧🇬 Bulgaria (+359)</option>
+                <option value="+226">🇧🇫 Burkina Faso (+226)</option>
+                <option value="+257">🇧🇮 Burundi (+257)</option>
+                <option value="+855">🇰🇭 Cambodia (+855)</option>
+                <option value="+237">🇨🇲 Cameroon (+237)</option>
+                <option value="+1">🇨🇦 Canada (+1)</option>
+                <option value="+238">🇨🇻 Cape Verde (+238)</option>
+                <option value="+236">🇨🇫 Central African Republic (+236)</option>
+                <option value="+235">🇹🇩 Chad (+235)</option>
+                <option value="+56">🇨🇱 Chile (+56)</option>
+                <option value="+86">🇨🇳 China (+86)</option>
+                <option value="+57">🇨🇴 Colombia (+57)</option>
+                <option value="+269">🇰🇲 Comoros (+269)</option>
+                <option value="+506">🇨🇷 Costa Rica (+506)</option>
+                <option value="+385">🇭🇷 Croatia (+385)</option>
+                <option value="+53">🇨🇺 Cuba (+53)</option>
+                <option value="+357">🇨🇾 Cyprus (+357)</option>
+                <option value="+420">🇨🇿 Czech Republic (+420)</option>
+                <option value="+45">🇩🇰 Denmark (+45)</option>
+                <option value="+253">🇩🇯 Djibouti (+253)</option>
+                <option value="+1">🇩🇴 Dominican Republic (+1)</option>
+                <option value="+593">🇪🇨 Ecuador (+593)</option>
+                <option value="+20">🇪🇬 Egypt (+20)</option>
+                <option value="+503">🇸🇻 El Salvador (+503)</option>
+                <option value="+372">🇪🇪 Estonia (+372)</option>
+                <option value="+251">🇪🇹 Ethiopia (+251)</option>
+                <option value="+679">🇫🇯 Fiji (+679)</option>
+                <option value="+358">🇫🇮 Finland (+358)</option>
+                <option value="+33">🇫🇷 France (+33)</option>
+                <option value="+241">🇬🇦 Gabon (+241)</option>
+                <option value="+995">🇬🇪 Georgia (+995)</option>
+                <option value="+49">🇩🇪 Germany (+49)</option>
+                <option value="+233">🇬🇭 Ghana (+233)</option>
+                <option value="+30">🇬🇷 Greece (+30)</option>
+                <option value="+502">🇬🇹 Guatemala (+502)</option>
+                <option value="+224">🇬🇳 Guinea (+224)</option>
+                <option value="+592">🇬🇾 Guyana (+592)</option>
+                <option value="+509">🇭🇹 Haiti (+509)</option>
+                <option value="+504">🇭🇳 Honduras (+504)</option>
+                <option value="+36">🇭🇺 Hungary (+36)</option>
+                <option value="+354">🇮🇸 Iceland (+354)</option>
+                <option value="+91" selected>🇮🇳 India (+91)</option>
+                <option value="+62">🇮🇩 Indonesia (+62)</option>
+                <option value="+98">🇮🇷 Iran (+98)</option>
+                <option value="+964">🇮🇶 Iraq (+964)</option>
+                <option value="+353">🇮🇪 Ireland (+353)</option>
+                <option value="+39">🇮🇹 Italy (+39)</option>
+                <option value="+81">🇯🇵 Japan (+81)</option>
+                <option value="+962">🇯🇴 Jordan (+962)</option>
+                <option value="+7">🇰🇿 Kazakhstan (+7)</option>
+                <option value="+254">🇰🇪 Kenya (+254)</option>
+                <option value="+965">🇰🇼 Kuwait (+965)</option>
+                <option value="+996">🇰🇬 Kyrgyzstan (+996)</option>
+                <option value="+856">🇱🇦 Laos (+856)</option>
+                <option value="+961">🇱🇧 Lebanon (+961)</option>
+                <option value="+218">🇱🇾 Libya (+218)</option>
+                <option value="+352">🇱🇺 Luxembourg (+352)</option>
+                <option value="+261">🇲🇬 Madagascar (+261)</option>
+                <option value="+60">🇲🇾 Malaysia (+60)</option>
+                <option value="+960">🇲🇻 Maldives (+960)</option>
+                <option value="+223">🇲🇱 Mali (+223)</option>
+                <option value="+356">🇲🇹 Malta (+356)</option>
+                <option value="+230">🇲🇺 Mauritius (+230)</option>
+                <option value="+52">🇲🇽 Mexico (+52)</option>
+                <option value="+212">🇲🇦 Morocco (+212)</option>
+                <option value="+95">🇲🇲 Myanmar (+95)</option>
+                <option value="+264">🇳🇦 Namibia (+264)</option>
+                <option value="+977">🇳🇵 Nepal (+977)</option>
+                <option value="+31">🇳🇱 Netherlands (+31)</option>
+                <option value="+64">🇳🇿 New Zealand (+64)</option>
+                <option value="+234">🇳🇬 Nigeria (+234)</option>
+                <option value="+47">🇳🇴 Norway (+47)</option>
+                <option value="+968">🇴🇲 Oman (+968)</option>
+                <option value="+92">🇵🇰 Pakistan (+92)</option>
+                <option value="+63">🇵🇭 Philippines (+63)</option>
+                <option value="+48">🇵🇱 Poland (+48)</option>
+                <option value="+351">🇵🇹 Portugal (+351)</option>
+                <option value="+974">🇶🇦 Qatar (+974)</option>
+                <option value="+40">🇷🇴 Romania (+40)</option>
+                <option value="+7">🇷🇺 Russia (+7)</option>
+                <option value="+966">🇸🇦 Saudi Arabia (+966)</option>
+                <option value="+65">🇸🇬 Singapore (+65)</option>
+                <option value="+27">🇿🇦 South Africa (+27)</option>
+                <option value="+82">🇰🇷 South Korea (+82)</option>
+                <option value="+34">🇪🇸 Spain (+34)</option>
+                <option value="+94">🇱🇰 Sri Lanka (+94)</option>
+                <option value="+46">🇸🇪 Sweden (+46)</option>
+                <option value="+41">🇨🇭 Switzerland (+41)</option>
+                <option value="+66">🇹🇭 Thailand (+66)</option>
+                <option value="+90">🇹🇷 Turkey (+90)</option>
+                <option value="+380">🇺🇦 Ukraine (+380)</option>
+                <option value="+44">🇬🇧 United Kingdom (+44)</option>
+                <option value="+1">🇺🇸 United States (+1)</option>
+                <option value="+58">🇻🇪 Venezuela (+58)</option>
+                <option value="+84">🇻🇳 Vietnam (+84)</option>
+                <option value="+967">🇾🇪 Yemen (+967)</option>
+                <option value="+263">🇿🇼 Zimbabwe (+263)</option>
+              </select>
+              <input type="tel" id="phoneApply" name="phone" placeholder="Enter phone number" required aria-label="Phone Number">
+            </div>
+          </div>
+          <h3>Professional Details</h3>
+          <div class="form-group">
+            <label for="qualification">Highest Qualification:</label>
+            <input type="text" id="qualification" name="qualification" required aria-label="Highest Qualification">
+          </div>
+          <div class="form-group">
+            <label for="subjectSpecialization">Subject Specialization:</label>
+            <input type="text" id="subjectSpecialization" name="subjectSpecialization" required aria-label="Subject Specialization">
+          </div>
+          <div class="form-group">
+            <label for="teachingExperience">(optional) Years of Teaching Experience:</label>
+            <input type="number" id="teachingExperience" name="teachingExperience" min="0" aria-label="Years of Teaching Experience">
+          </div>
+          <div class="form-group">
+            <label for="previousInstitution">(optional) Name of Previous Institution:</label>
+            <input type="text" id="previousInstitution" name="previousInstitution" aria-label="Previous Institution">
+          </div>
+          <div class="form-group">
+            <label for="positionHeld">(optional) Last Position Held:</label>
+            <input type="text" id="positionHeld" name="positionHeld" aria-label="Last Position Held">
+          </div>
+          <h3>Application Details</h3>
+          <div class="form-group">
+            <label for="preferredClass">Preferred Class to Teach:</label>
+            <input type="text" id="preferredClass" name="preferredClass" required aria-label="Preferred Class to Teach">
+          </div>
+          <button type="submit">Submit Application</button>
+          <p>For any inquiry, <a href="#contact">Contact Us</a></p>
+          <div id="applicationMessage" class="message" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>Have questions? Reach out to us via email, phone, or social media.</p>
+        <div class="contact-info">
+          <p class="mail-link">
+            <a href="mailto:contact@aceacademy.com">
+              <i class="fa-regular fa-envelope"></i> contact@aceacademy.com
+            </a>
+          </p>
+          <p class="phone-link">
+            <a href="tel:+918008691258">
+              <i class="fas fa-phone"></i> +91 80086 91258
+            </a>
+          </p>
+          <p class="social-link">
+            <a href="https://www.instagram.com/ace_academy2024" target="_blank">
+              <i class="fab fa-instagram"></i> ace_academy2024
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="chatContainer">
+    <div id="chatHeader">
+      <span>Ace Academy Assistant</span>
+      <button id="chatMinimize">−</button>
+    </div>
+    <div id="chatMessages"></div>
+    <div id="chatInput">
+      <textarea id="userInput" placeholder="Type your message..." rows="1"></textarea>
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
+  <button id="chatButton" title="Chat with us on WhatsApp"><i class="fab fa-whatsapp"></i></button>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Ace Academy. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ace_academy2024" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:contact@aceacademy.com"><i class="fa-regular fa-envelope"></i></a>
+        <a href="tel:+918008691258"><i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Function to get the current date and time in a readable format
+      const getTimestamp = () => {
+        const now = new Date();
+        return now.toISOString(); // ISO format (e.g., 2025-05-18T10:21:00.000Z)
+      };
+
+      // Shared handleFormSubmit function for both forms
+      const handleFormSubmit = async (formData, messageDiv, form, successMessage, countryCodeId, phoneId) => {
+        try {
+          // Combine country code and phone number
+          const countryCode = document.getElementById(countryCodeId).value;
+          const phoneNumber = document.getElementById(phoneId).value;
+          formData.phone = `${countryCode}${phoneNumber}`; // Concatenate country code and phone number
+          delete formData.countryCode; // Remove countryCode from formData as it's now part of phone
+
+          // Add timestamp to form data
+          const timestamp = getTimestamp();
+          formData.timestamp = timestamp;
+
+          // Send form data with timestamp to backend
+          const response = await axios.post(
+            formData.formType === "enrollment"
+              ? "http://localhost:4000/submit"
+              : "http://localhost:4000/submit-teacher-application",
+            formData,
+            {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+
+          console.log(`${successMessage} Success:`, response.data.message);
+
+          // Show success message
+          messageDiv.textContent = response.data.message;
+          messageDiv.className = "message success";
+          messageDiv.hidden = false;
+
+          // Reset the form after successful submission
+          form.reset();
+
+        } catch (error) {
+          console.error(`Error submitting ${successMessage.toLowerCase()}:`, error);
+
+          // Show error message
+          messageDiv.textContent = error.response?.data?.message || "An error occurred. Please try again.";
+          messageDiv.className = "message error";
+          messageDiv.hidden = false;
+        }
+      };
+
+      // Section Animations
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      sections.forEach(section => observer.observe(section));
+
+      // WhatsApp Chat
+      const chatButton = document.getElementById('chatButton');
+      const chatContainer = document.getElementById('chatContainer');
+      const chatMinimize = document.getElementById('chatMinimize');
+      const sendButton = document.getElementById('sendButton');
+      const userInput = document.getElementById('userInput');
+      const chatMessages = document.getElementById('chatMessages');
+
+      chatButton.addEventListener('click', () => {
+        const phoneNumber = '+918008691258';
+        const message = encodeURIComponent("Hello, I'm contacting Ace Academy from the website!");
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+      });
+
+      chatMinimize.addEventListener('click', () => {
+        chatContainer.classList.remove('chat-visible');
+      });
+
+      sendButton.addEventListener('click', () => {
+        const message = userInput.value.trim();
+        if (message) {
+          const userMsg = document.createElement('div');
+          userMsg.className = 'message user-message';
+          userMsg.textContent = message;
+          chatMessages.appendChild(userMsg);
+          userInput.value = '';
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+
+          setTimeout(() => {
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message bot-message';
+            botMsg.textContent = "Thank you for your message! How can I assist you today?";
+            chatMessages.appendChild(botMsg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 1000);
+        }
+      });
+
+      // Enrollment Form Logic
+      const enrollmentForm = document.getElementById("enrollmentForm");
+      if (enrollmentForm) {
+        const enrollmentSubmitButton = enrollmentForm.querySelector("button[type='submit']");
+        const enrollmentMessageDiv = document.getElementById("enrollmentMessage");
+
+        enrollmentForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          enrollmentSubmitButton.textContent = "Submitting...";
+          enrollmentSubmitButton.disabled = true;
+          enrollmentMessageDiv.hidden = true;
+
+          const formData = new FormData(enrollmentForm);
+          const data = Object.fromEntries(formData.entries());
+          data.formType = "enrollment";
+
+          await handleFormSubmit(data, enrollmentMessageDiv, enrollmentForm, "Enrollment", "countryCodeEnroll", "phoneEnroll");
+
+          enrollmentSubmitButton.textContent = "Submit";
+          enrollmentSubmitButton.disabled = false;
+        });
+      }
+
+      // Teacher Application Form Logic
+      const teacherForm = document.getElementById("teacherApplicationForm");
+      if (teacherForm) {
+        const teacherSubmitButton = teacherForm.querySelector("button[type='submit']");
+        const teacherMessageDiv = document.getElementById("applicationMessage");
+
+        teacherForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          teacherSubmitButton.textContent = "Submitting...";
+          teacherSubmitButton.disabled = true;
+          teacherMessageDiv.hidden = true;
+
+          const formData = new FormData(teacherForm);
+          const data = Object.fromEntries(formData.entries());
+          data.formType = "teacherApplication";
+
+          await handleFormSubmit(data, teacherMessageDiv, teacherForm, "Application", "countryCodeApply", "phoneApply");
+
+          teacherSubmitButton.textContent = "Submit Application";
+          teacherSubmitButton.disabled = false;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
